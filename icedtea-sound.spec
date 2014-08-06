@@ -77,11 +77,14 @@ rm -rf $RPM_BUILD_ROOT
 %post javadoc
 ln -nfs %{name}-%{version} %{_javadocdir}/%{name}
 
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
+%attr(755,root,root) %{_libdir}/libicedtea-sound.so.1.0.1
 %attr(755,root,root) %{_libdir}/libicedtea-sound.so
-%attr(755,root,root) %{_libdir}/libicedtea-sound.so.1.*.*
 %{_datadir}/%{name}
 
 %if %{with javadoc}
